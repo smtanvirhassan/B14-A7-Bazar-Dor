@@ -37,10 +37,13 @@ export default function SignInPage() {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signIn.social({
+      const res = await signIn.social({
         provider: "google",
         callbackURL: "/",
       });
+      if (res?.error) {
+        toast.error("Google ক্লায়েন্ট আইডি কনফিগার করা হয়নি!");
+      }
     } catch {
       toast.error("Google লগইন ব্যর্থ হয়েছে!");
     }
@@ -48,10 +51,13 @@ export default function SignInPage() {
 
   const handleGitHubSignIn = async () => {
     try {
-      await signIn.social({
+      const res = await signIn.social({
         provider: "github",
         callbackURL: "/",
       });
+      if (res?.error) {
+        toast.error("GitHub ক্লায়েন্ট আইডি কনফিগার করা হয়নি!");
+      }
     } catch {
       toast.error("GitHub লগইন ব্যর্থ হয়েছে!");
     }
