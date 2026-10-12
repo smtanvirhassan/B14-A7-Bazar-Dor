@@ -94,7 +94,7 @@ npm start
 
 ## 📬 সাবমিশন লিংক (Submission Links)
 
-- **Live Deployment Link:** https://bazardorapp-one.vercel.app
+- **Live Deployment Link:** https://bazardorapp-liart.vercel.app
 - **GitHub Repository Link:** https://github.com/smtanvirhassan/B14-A7-Bazar-Dor
 
 ---
