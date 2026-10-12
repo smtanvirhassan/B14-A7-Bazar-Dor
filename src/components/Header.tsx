@@ -216,6 +216,7 @@ function PriceTicker() {
   const [products, setProducts] = useState<
     {
       id: number;
+      slug: string;
       image: string;
       nameBn: string;
       today: number;
@@ -243,17 +244,18 @@ function PriceTicker() {
   const items = [...products, ...products]; // duplicate for seamless loop
 
   return (
-    <div className="relative w-full h-10 flex items-center overflow-hidden border-t border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+    <div className="group relative w-full h-10 flex items-center overflow-hidden border-t border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
       <div
-        className="flex whitespace-nowrap"
+        className="flex whitespace-nowrap group-hover:[animation-play-state:paused]"
         style={{
           animation: "ticker-scroll 40s linear infinite",
         }}
       >
         {items.map((d, idx) => (
-          <span
+          <Link
             key={`${d.id}-${idx}`}
-            className="inline-flex items-center gap-1.5 px-4 text-sm"
+            href={`/product/${d.slug}`}
+            className="inline-flex items-center gap-1.5 px-4 text-sm hover:underline cursor-pointer transition-colors hover:text-green-800"
           >
             <span>{d.image}</span>
             <span className="font-semibold">{d.nameBn}</span>
@@ -272,7 +274,7 @@ function PriceTicker() {
               {d.change.dir === "up" ? "▲" : d.change.dir === "down" ? "▼" : "–"}{" "}
               {Math.abs(d.change.pct).toLocaleString("bn-BD")}%
             </span>
-          </span>
+          </Link>
         ))}
       </div>
     </div>
