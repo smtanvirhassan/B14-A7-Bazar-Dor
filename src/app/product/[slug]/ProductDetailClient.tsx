@@ -50,14 +50,12 @@ export default function ProductDetailClient({
 
   const { markets } = product;
 
-  // Calculate min, max, avg from markets
   const allMin = Math.min(...markets.map((m) => m.min));
   const allMax = Math.max(...markets.map((m) => m.max));
   const allAvg = Math.round(
     markets.reduce((sum, m) => sum + (m.min + m.max) / 2, 0) / markets.length
   );
 
-  // Group markets by division
   const divisionMap = new Map<
     string,
     { market: string; min: number; max: number }[]
@@ -85,7 +83,7 @@ export default function ProductDetailClient({
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Breadcrumb */}
+      
       <div className="text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:text-green-700">
           হোম
@@ -101,7 +99,7 @@ export default function ProductDetailClient({
         <span className="text-gray-900">{product.nameBn}</span>
       </div>
 
-      {/* Top Summary */}
+      
       <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 mb-6">
         <div className="flex items-start gap-4 mb-4">
           <span className="text-6xl">{product.image}</span>
@@ -129,7 +127,7 @@ export default function ProductDetailClient({
         </div>
       </div>
 
-      {/* Price Summary Cards */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <div className="bg-green-50 rounded-2xl p-5 text-center border border-green-100">
           <p className="text-sm text-green-700 font-medium mb-1">
@@ -155,7 +153,7 @@ export default function ProductDetailClient({
         </div>
       </div>
 
-      {/* Market-wise prices */}
+      
       <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8">
         <h2 className="text-xl font-bold text-gray-900 mb-6">
           🏪 বাজারভিত্তিক আজকের দাম

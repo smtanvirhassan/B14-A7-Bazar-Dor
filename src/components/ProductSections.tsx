@@ -16,7 +16,7 @@ export default async function ProductSections() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 space-y-14">
-      {/* Section A — Price risers */}
+      
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
           <span className="text-red-500">▲</span> আজ দাম বেড়েছে
@@ -28,7 +28,7 @@ export default async function ProductSections() {
         </div>
       </section>
 
-      {/* Section B — Price fallers */}
+      
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
           <span className="text-green-500">▼</span> আজ দাম কমেছে
@@ -40,7 +40,7 @@ export default async function ProductSections() {
         </div>
       </section>
 
-      {/* Section C — All products */}
+      
       <section id="সব-পণ্য">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">

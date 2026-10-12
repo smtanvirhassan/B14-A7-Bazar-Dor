@@ -9,7 +9,7 @@ type Props = {
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
   
-  // Fetch all products and find by slug
+
   const products = await fetchProducts();
   const product = products.find((p) => p.slug === slug);
 

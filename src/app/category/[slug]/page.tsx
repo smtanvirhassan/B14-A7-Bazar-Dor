@@ -9,7 +9,6 @@ type Props = {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
 
-  // Verify category exists
   const categories = await fetchCategories();
   const category = categories.find((c) => c.slug === slug);
 

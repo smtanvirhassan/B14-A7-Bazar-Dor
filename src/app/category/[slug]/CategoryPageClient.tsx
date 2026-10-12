@@ -50,7 +50,7 @@ export default function CategoryPageClient({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Header */}
+      
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-2">
@@ -62,7 +62,7 @@ export default function CategoryPageClient({
           </p>
         </div>
 
-        {/* Sort Dropdown */}
+        
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium text-gray-600">সাজান:</label>
           <select
@@ -77,7 +77,7 @@ export default function CategoryPageClient({
         </div>
       </div>
 
-      {/* Product Grid */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {sortedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />

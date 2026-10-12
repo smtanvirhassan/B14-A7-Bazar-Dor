@@ -44,7 +44,7 @@ export default function ProfilePage() {
   return (
     <div className="max-w-lg mx-auto px-4 py-16">
       <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 text-center">
-        {/* Avatar */}
+        
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
           {user.image ? (
             <img

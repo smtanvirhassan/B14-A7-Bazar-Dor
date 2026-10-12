@@ -34,10 +34,10 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Top row: Logo + Auth */}
+      
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          
           <Link href="/" className="flex items-center gap-2">
             <div className="bg-green-700 p-1.5 rounded-xl">
               <Image
@@ -50,7 +50,7 @@ export default function Header() {
             </div>
             <div>
               <h1 className="font-bold text-gray-900 leading-tight text-base">
-                🛒 বাজার দর
+                বাজার দর
               </h1>
               <p className="text-xs text-gray-500 leading-tight">
                 প্রয়োজনীয় পণ্যের দাম
@@ -58,7 +58,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Mobile menu toggle */}
+          
           <button
             className="lg:hidden btn btn-ghost btn-sm"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -78,7 +78,7 @@ export default function Header() {
             </svg>
           </button>
 
-          {/* Auth buttons - desktop */}
+          
           <div className="hidden lg:flex items-center gap-2">
             {session?.user ? (
               <div className="flex items-center gap-3">
@@ -115,7 +115,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Category nav links */}
+      
       <div className="border-t border-gray-100 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <nav className="hidden lg:flex items-center gap-1 py-2 overflow-x-auto">
@@ -141,7 +141,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-gray-200 bg-white px-4 pb-4">
           <nav className="flex flex-wrap gap-2 py-3">
@@ -206,7 +206,7 @@ export default function Header() {
         </div>
       )}
 
-      {/* Price ticker marquee */}
+      
       <PriceTicker />
     </header>
   );
