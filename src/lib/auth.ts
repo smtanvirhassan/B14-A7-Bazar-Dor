@@ -10,9 +10,6 @@ const mongoUri = process.env.MONGODB_URI || directMongoUri;
 const client = new MongoClient(mongoUri);
 const db = client.db("bazardor");
 
-// Always define google and github providers.
-// If actual credentials aren't in env, placeholder values allow BetterAuth
-// to register the provider endpoints without throwing PROVIDER_NOT_FOUND.
 const googleClientId =
   process.env.GOOGLE_CLIENT_ID || "demo-google-client-id.apps.googleusercontent.com";
 const googleClientSecret =
@@ -25,6 +22,12 @@ export const auth = betterAuth({
   database: mongodbAdapter(db),
   secret: process.env.BETTER_AUTH_SECRET || "bazar-dor-secret-key-for-auth-2026",
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google", "github"],
+    },
+  },
   emailAndPassword: {
     enabled: true,
   },
