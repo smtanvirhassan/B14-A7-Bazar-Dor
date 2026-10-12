@@ -46,7 +46,7 @@ export default function SignUpPage() {
         callbackURL: "/",
       });
       if (res?.error) {
-        toast.error("Google ক্লায়েন্ট আইডি কনফিগার করা হয়নি!");
+        toast.error(res.error.message || "Google লগইন ব্যর্থ হয়েছে!");
       }
     } catch {
       toast.error("Google লগইন ব্যর্থ হয়েছে!");
@@ -60,7 +60,7 @@ export default function SignUpPage() {
         callbackURL: "/",
       });
       if (res?.error) {
-        toast.error("GitHub ক্লায়েন্ট আইডি কনফিগার করা হয়নি!");
+        toast.error(res.error.message || "GitHub লগইন ব্যর্থ হয়েছে!");
       }
     } catch {
       toast.error("GitHub লগইন ব্যর্থ হয়েছে!");
