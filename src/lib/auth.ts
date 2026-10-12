@@ -1,23 +1,15 @@
-import dns from "node:dns";
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 
-// Ensure SRV DNS lookup succeeds in all environments (including Windows local dev)
-try {
-  dns.setServers(["8.8.8.8", "1.1.1.1"]);
-} catch {
-  // Ignore if not permitted
-}
+// Direct replica-set connection string ensures reliable connection on all OS environments
+// avoiding Windows Node.js libuv SRV lookup failure (querySrv ECONNREFUSED)
+const directMongoUri =
+  "mongodb://bazar_dor_app:CXgXUK08Db3DI2KN@ac-yccslu3-shard-00-00.okwqo0n.mongodb.net:27017,ac-yccslu3-shard-00-01.okwqo0n.mongodb.net:27017,ac-yccslu3-shard-00-02.okwqo0n.mongodb.net:27017/bazardor?ssl=true&replicaSet=atlas-qw8asw-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-const mongoUri =
-  process.env.MONGODB_URI ||
-  process.env.Mongo_url ||
-  "mongodb+srv://bazar_dor_app:CXgXUK08Db3DI2KN@cluster0.okwqo0n.mongodb.net/bazardor?retryWrites=true&w=majority&appName=Cluster0";
+const mongoUri = process.env.MONGODB_URI || directMongoUri;
 
 const client = new MongoClient(mongoUri);
-
-// Reuse connected database
 const db = client.db("bazardor");
 
 export const auth = betterAuth({
