@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
@@ -11,16 +11,18 @@ export default function UpdateProfilePage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (!isPending && !session?.user) {
+    if (!isPending && !session?.user && !hasRedirected.current) {
+      hasRedirected.current = true;
       toast.error("প্রোফাইল আপডেট করতে লগইন করুন!");
-      router.push("/signin");
+      router.replace("/signin");
     }
     if (session?.user?.name) {
       setName(session.user.name);
     }
-  }, [isPending, session, router]);
+  }, [isPending, session?.user, router]);
 
   if (isPending) {
     return (

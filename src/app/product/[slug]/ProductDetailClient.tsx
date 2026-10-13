@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
@@ -19,13 +19,15 @@ export default function ProductDetailClient({
 }) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (!isPending && !session?.user) {
+    if (!isPending && !session?.user && !hasRedirected.current) {
+      hasRedirected.current = true;
       toast.error("এই পৃষ্ঠা দেখতে লগইন করুন!");
-      router.push("/signin");
+      router.replace("/signin");
     }
-  }, [isPending, session, router]);
+  }, [isPending, session?.user, router]);
 
   if (isPending) {
     return (

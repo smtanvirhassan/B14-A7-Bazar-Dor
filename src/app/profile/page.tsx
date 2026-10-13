@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "@/lib/auth-client";
 import Link from "next/link";
@@ -9,13 +9,15 @@ import toast from "react-hot-toast";
 export default function ProfilePage() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (!isPending && !session?.user) {
+    if (!isPending && !session?.user && !hasRedirected.current) {
+      hasRedirected.current = true;
       toast.error("প্রোফাইল দেখতে লগইন করুন!");
-      router.push("/signin");
+      router.replace("/signin");
     }
-  }, [isPending, session, router]);
+  }, [isPending, session?.user, router]);
 
   if (isPending) {
     return (
