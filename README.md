@@ -92,11 +92,5 @@ npm start
 
 ---
 
-## 📬 সাবমিশন লিংক (Submission Links)
-
-- **Live Deployment Link:** https://bazar-dor-app-vert.vercel.app
-- **GitHub Repository Link:** https://github.com/smtanvirhassan/B14-A7-Bazar-Dor
-
----
 
 *সকল দাম সম্ভাব্য; বাজার অবস্থার ওপর নির্ভর করে পরিবর্তিত হয়।*
