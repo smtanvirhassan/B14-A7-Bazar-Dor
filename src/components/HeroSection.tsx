@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { Suspense } from "react";
-import { connection } from "next/server";
 import moment from "moment";
 import "moment/locale/bn";
 
-const BengaliDate = async () => {
-  await connection();
+const BengaliDate = () => {
   const dateString = moment().locale("bn").format("dddd, D MMMM, YYYY");
   return <>{dateString}</>;
 };
