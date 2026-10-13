@@ -7,7 +7,11 @@ const directMongoUri =
 
 const mongoUri = process.env.MONGODB_URI || directMongoUri;
 
-const client = new MongoClient(mongoUri);
+const client = new MongoClient(mongoUri, {
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 8000,
+  connectTimeoutMS: 8000,
+});
 const db = client.db("bazardor");
 
 const googleClientId =
@@ -19,10 +23,22 @@ const githubClientId = process.env.GITHUB_CLIENT_ID || "demo-github-client-id";
 const githubClientSecret = process.env.GITHUB_CLIENT_SECRET || "demo-github-client-secret";
 
 const getBaseURL = () => {
-  if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
-  if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  if (process.env.BETTER_AUTH_URL && !process.env.BETTER_AUTH_URL.includes("localhost")) {
+    return process.env.BETTER_AUTH_URL;
+  }
+  if (process.env.NEXT_PUBLIC_APP_URL && !process.env.NEXT_PUBLIC_APP_URL.includes("localhost")) {
+    return process.env.NEXT_PUBLIC_APP_URL;
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  if (process.env.NODE_ENV === "production") {
+    return "https://bazar-dor-app-vert.vercel.app";
+  }
+  return process.env.BETTER_AUTH_URL || "http://localhost:3000";
 };
 
 export const auth = betterAuth({
@@ -53,6 +69,8 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://bazar-dor-app-vert.vercel.app",
+    "https://bazardorapp-liart.vercel.app",
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
     ...(process.env.NEXT_PUBLIC_APP_URL ? [process.env.NEXT_PUBLIC_APP_URL] : []),
     "https://*.vercel.app",

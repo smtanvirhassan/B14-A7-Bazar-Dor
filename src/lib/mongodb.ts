@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI || process.env.Mongo_url || "mongodb://localhost:27017/bazardor";
+const directMongoUri =
+  "mongodb://bazar_dor_app:CXgXUK08Db3DI2KN@ac-yccslu3-shard-00-00.okwqo0n.mongodb.net:27017,ac-yccslu3-shard-00-01.okwqo0n.mongodb.net:27017,ac-yccslu3-shard-00-02.okwqo0n.mongodb.net:27017/bazardor?ssl=true&replicaSet=atlas-qw8asw-shard-0&authSource=admin&retryWrites=true&w=majority";
+
+const uri = process.env.MONGODB_URI || process.env.Mongo_url || directMongoUri;
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;

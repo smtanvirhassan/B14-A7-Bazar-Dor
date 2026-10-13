@@ -2,6 +2,8 @@ import { auth } from "@/lib/auth";
 import { toNextJsHandler } from "better-auth/next-js";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const handler = toNextJsHandler(auth);
 
 export async function GET(request: NextRequest) {
@@ -19,7 +21,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    return await handler.POST(request);
+    const res = await handler.POST(request);
+    return res;
   } catch (err: unknown) {
     const error = err as Error;
     console.error("Auth POST error:", error);
